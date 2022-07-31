@@ -58,3 +58,23 @@ If you get any storage related errors you may need to give the device more stora
 
 You're now ready for Flutter app development!
 
+## Making the app your own - P1
+
+We have 2 values to create for our new project.
+- YOUR_APP_NAME, eg `thenetworkapp`
+- REVERSE_DOMAIN_NAME, eg `io.thenetwork.thenetworkapp`
+
+The first change we'll make to the app will be to change references from quizapp to YOUR_APP_NAME.
+
+In `pubspec.yaml` change `name:` to YOUR_APP_NAME.
+
+In `android/app/build.gradle` change `applicationId:` to REVERSE_DOMAIN_NAME for your app.
+
+In `lib/` replace refernces to local packages from `package:quizapp` to `package:YOUR_APP_NAME`
+
+Delete `ios/` folder if you're not planning on doing any iOS development yet.
+
+You can add a `android/app/google-services.json` now if you've configured your Firebase App, or later when you're ready.
+
+Your app should still load, however it may not be able to connect to the Firebase backend to load topics.
+

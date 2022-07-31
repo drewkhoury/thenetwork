@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/routes.dart';
-import 'package:quizapp/services/services.dart';
-import 'package:quizapp/shared/shared.dart';
-import 'package:quizapp/theme.dart';
+import 'package:thenetworkapp/routes.dart';
+import 'package:thenetworkapp/services/services.dart';
+import 'package:thenetworkapp/shared/shared.dart';
+import 'package:thenetworkapp/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

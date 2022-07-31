@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/services/services.dart';
-import 'package:quizapp/shared/shared.dart';
+import 'package:thenetworkapp/services/services.dart';
+import 'package:thenetworkapp/shared/shared.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

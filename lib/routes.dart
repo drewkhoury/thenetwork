@@ -1,8 +1,8 @@
-import 'package:quizapp/about/about.dart';
-import 'package:quizapp/profile/profile.dart';
-import 'package:quizapp/login/login.dart';
-import 'package:quizapp/topics/topics.dart';
-import 'package:quizapp/home/home.dart';
+import 'package:thenetworkapp/about/about.dart';
+import 'package:thenetworkapp/profile/profile.dart';
+import 'package:thenetworkapp/login/login.dart';
+import 'package:thenetworkapp/topics/topics.dart';
+import 'package:thenetworkapp/home/home.dart';
 
 var appRoutes = {
   '/': (context) => const HomeScreen(),

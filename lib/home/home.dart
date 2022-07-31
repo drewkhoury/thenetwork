@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/login/login.dart';
-import 'package:quizapp/services/auth.dart';
-import 'package:quizapp/shared/shared.dart';
-import 'package:quizapp/topics/topics.dart';
+import 'package:thenetworkapp/login/login.dart';
+import 'package:thenetworkapp/services/auth.dart';
+import 'package:thenetworkapp/shared/shared.dart';
+import 'package:thenetworkapp/topics/topics.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

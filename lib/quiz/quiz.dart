@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/quiz/quiz_state.dart';
-import 'package:quizapp/services/firestore.dart';
-import 'package:quizapp/services/models.dart';
-import 'package:quizapp/shared/loading.dart';
-import 'package:quizapp/shared/progress_bar.dart';
+import 'package:thenetworkapp/quiz/quiz_state.dart';
+import 'package:thenetworkapp/services/firestore.dart';
+import 'package:thenetworkapp/services/models.dart';
+import 'package:thenetworkapp/shared/loading.dart';
+import 'package:thenetworkapp/shared/progress_bar.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key, required this.quizId});

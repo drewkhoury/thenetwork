@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:quizapp/services/auth.dart';
-import 'package:quizapp/services/models.dart';
+import 'package:thenetworkapp/services/auth.dart';
+import 'package:thenetworkapp/services/models.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -23,7 +23,7 @@ class FirestoreService {
     return Quiz.fromJson(snapshot.data() ?? {});
   }
 
-    /// Listens to current user's report document in Firestore
+  /// Listens to current user's report document in Firestore
   Stream<Report> streamReport() {
     return AuthService().userStream.switchMap((user) {
       if (user != null) {
