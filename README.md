@@ -151,3 +151,7 @@ We're going to simplify the application by removing some of the quiz specific pa
 38 seconds:
 
 ![](docs/run-p2.gif)
+
+# Release Process
+
+Coming Soon!
