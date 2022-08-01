@@ -8,7 +8,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('about'), backgroundColor: Colors.blue),
       body: const Center(
-        child: Text('About this app...'),
+        child: Text('A new kind of social network.'),
       ),
     );
   }

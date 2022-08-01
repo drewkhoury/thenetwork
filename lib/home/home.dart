@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:thenetworkapp/login/login.dart';
 import 'package:thenetworkapp/services/auth.dart';
 import 'package:thenetworkapp/shared/shared.dart';
-import 'package:thenetworkapp/topics/topics.dart';
+import 'package:thenetworkapp/entry/entry.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             child: ErrorMessage(),
           );
         } else if (snapshot.hasData) {
-          return const TopicsScreen();
+          return const EntryScreen();
         } else {
           return const LoginScreen();
         }

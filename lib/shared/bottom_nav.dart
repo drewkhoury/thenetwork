@@ -10,10 +10,10 @@ class BottomNavBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(
-            FontAwesomeIcons.graduationCap,
+            FontAwesomeIcons.computer,
             size: 20,
           ),
-          label: 'Topics',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(

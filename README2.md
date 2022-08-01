@@ -44,6 +44,8 @@ You should be able to click "Run main.dart". This will:
 - Build the app
 - Start the emulator/device and connect to it, and load the app
 
+15 seconds:
+
 ![](docs/run.gif)
 
 ## Troubeshooting
@@ -58,7 +60,7 @@ If you get any storage related errors you may need to give the device more stora
 
 You're now ready for Flutter app development!
 
-## Making the app your own - P1
+## Making the app your own - Part 1
 
 We have 2 values to create for our new project.
 - YOUR_APP_NAME, eg `thenetworkapp`
@@ -78,3 +80,49 @@ You can add a `android/app/google-services.json` now if you've configured your F
 
 Your app should still load, however it may not be able to connect to the Firebase backend to load topics.
 
+## Android Play store and Firebase Setup (small detour to make sure you get the basics setup)
+
+We'll need to deploy a real app soon and that will require:
+- A developer account in the play store
+- A firebase account
+
+### Firebase setup (needed to test auth locally)
+
+Login to https://console.firebase.google.com/ with a Google Acocunt.
+
+Create a new Android App, using these details:
+- REVERSE_DOMAIN_NAME, eg `io.thenetwork.thenetworkapp`
+- In a terminal, run `./gradlew signingReport` from your project folder and get the SHA-1 from the `debugAndroidTest` section.
+
+You should now have a `google-services.json` file that you can put in `android/app/` so your app can connect to Firebase.
+
+You should enable auth services like `anonymous` and `google`, otherwise they won't work when you load your app.
+### Play store setup (needed to deploy an app)
+
+Follow a guide like this: [How to Publish an Android App on Google Play Store: A Step-by-Step Guide](https://orangesoft.co/blog/how-to-publish-an-android-app-on-google-play-store)
+- Signup for a [google play developer account](https://play.google.com/apps/publish/signup/)
+  - use a real google account
+  - prepare to validate with a photo of your id
+  - $25
+- You can start creating your store listing, but you will need photos of your app and other things, you can come back to the details later
+
+## Making the app your own - Part 2
+
+We're going to simplify the application by removing some of the quiz specific parts. This will make it easier to deploy a real app, while still keeping the core parts of login and auth. It will also give us a chance to become familar with a real app structure when it come to building something more complicated in the future.
+
+- `lib/about/about.dart` - Update the text to explain what this app does
+- In `home/home.dart` replace `topics` to `entry` and `EntryScreen`
+- Rename `topics/` to `entry/` and `topics.dart` to `entry.dart` (convert to a simple text page like the about page), and delete `topic_item.dart`, `drawer.dart`
+- Update `entry.dart` so that it's just the scafold, with some text in the body, with links to profile and bottom nav (but remove all the topic load and drawer referenecs) ... make sure you update it to say `EntryScreen`
+- Update `routes.dart` and `home.dart` to `EntryScreen`
+- Update `profile` to remove reference to quizzes
+- Remove `quiz/`
+- Update `bottom_nav.dart` with custom text/icon for your home/entry
+- `firestore.dart` and `models.dart` remove most things here
+- remove everything under `JsonSerializableGenerator` in `models.g.dart` 
+- `progress_bar.dart` remove `TopicProgress` class
+- `main.dart` to keep the code/flow but avoid having to worry too much about firebase structures, use a dummy stream
+
+38 seconds:
+
+![](docs/run-p2.gif)
