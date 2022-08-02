@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.fireship.quizapp">
+    package="io.thenetwork.thenetworkapp">
    <application
-        android:label="quizapp"
+        android:label="thenetworkapp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

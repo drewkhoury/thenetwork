@@ -79,7 +79,16 @@ If you have trouble loading the devcies in a new Android Studio project, open "m
 
 Do not try and open more than one project at a time, you may have build/run issues and problems connecting to the emulator.
 
-If you get any storage related errors you may need to give the device more storage space.
+If you get a storage related error you may need to give the device more storage space:
+
+```
+adb: failed to install /app.apk: Failure [INSTALL_FAILED_INSUFFICIENT_STORAGE]
+```
+
+Things to try:
+- Devices seem to default to `800 mb` and I typically change them to something large like `6144 MB` (6 GB) - See [Create and manage virtual devices](https://developer.android.com/studio/run/managing-avds)
+- You can also `wipe data` on emulators
+- `flutter clean` and restart emulators/android studio
 
 # Next steps
 
@@ -129,6 +138,7 @@ Follow a guide like this: [How to Publish an Android App on Google Play Store: A
   - use a real google account
   - prepare to validate with a photo of your id
   - $25
+
 - You can start creating your store listing, but you will need photos of your app and other things, you can come back to the details later
 
 ## Making the app your own - Part 2
@@ -152,6 +162,136 @@ We're going to simplify the application by removing some of the quiz specific pa
 
 ![](docs/run-p2.gif)
 
-# Release Process
+## Release process and tidy up - Part 3
 
-Coming Soon!
+First let's take care of a bit of tidy up activities to get our project in a healthly state.
+
+### Tidy up
+
+#### Source file cleanup
+
+One app-name specific area we need to fix is `app/src/main/kotlin/com/example` - replace quiz reference in the folder, and `Mainactivty.kt`, this may have caused the following error:
+
+```
+E/AndroidRuntime(11978): FATAL EXCEPTION: main
+E/AndroidRuntime(11978): Process: io.thenetwork.thenetworkapp, PID: 11978
+E/AndroidRuntime(11978): java.lang.RuntimeException: Unable to instantiate activity ComponentInfo{io.thenetwork.thenetworkapp/io.thenetwork.thenetworkapp.MainActivity}: java.lang.ClassNotFoundException: Didn't find class "io.thenetwork.thenetworkapp.MainActivity" ...
+```
+
+Though it's not clear why this error didn't present itself earlier.
+
+#### Project SDK Default
+
+In Android studio, go to `File > Project Structure > Project SDK` and set it to the `Anroid API v33` from the drop down.
+
+#### Local testing - with a real Android device
+
+Settings > About > Tap x7
+Settings > Developer Options > USB Debugging
+
+Then connect via USB Cable and it should be a device you can connect to.
+
+![](docs/run-local.gif)
+
+#### Update Gradle
+
+You might have noticed these warnings when building:
+
+```
+Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
+Warning: Mapping new ns http://schemas.android.com/repository/android/generic/02 to old ns http://schemas.android.com/repository/android/generic/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/addon2/02 to old ns http://schemas.android.com/sdk/android/repo/addon2/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/addon2/03 to old ns http://schemas.android.com/sdk/android/repo/addon2/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/repository2/02 to old ns http://schemas.android.com/sdk/android/repo/repository2/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/repository2/03 to old ns http://schemas.android.com/sdk/android/repo/repository2/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/sys-img2/03 to old ns http://schemas.android.com/sdk/android/repo/sys-img2/01
+Warning: Mapping new ns http://schemas.android.com/sdk/android/repo/sys-img2/02 to old ns http://schemas.android.com/sdk/android/repo/sys-img2/01
+
+Warning: unexpected element (uri:"", local:"base-extension"). Expected elements are <{}codename>,<{}layoutlib>,<{}api-level>
+```
+
+You should be able to address these by updating `android/build.gradle`:
+
+```
+// https://kotlinlang.org/docs/gradle.html
+ext.kotlin_version = '1.7.10'
+
+// https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google
+classpath 'com.android.tools.build:gradle:7.2.1'
+```
+
+
+And updating `android/gradle/warpper/gradle-wrapper.properties`:
+
+```
+# https://services.gradle.org/distributions/
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.3-all.zip
+```
+
+### First-time Deployment
+
+For our release, We're going to follow the notes here: https://docs.flutter.dev/deployment/android and note down the changes we needed to make below.
+
+To prepare for app realase, you may want to setup a privacy page, and consider getting a special email for communications about this app, and for things like admin/support for the app, like myappadmin@gmail.com
+#### AndroidManifest
+
+Make sure `android/app/src/main/AndroidManifest.xml` (and other variants like  `debug/` or `profile/`) has your correct app name.
+
+#### Generate icons
+
+Create an app icon `assets/icon/icon.png`
+
+Use https://pub.dev/packages/flutter_launcher_icons to generate icons for the android platform.
+
+Update `pubspec.yaml` with the flutter_launcher_icons dependency and config.
+
+Run this:
+
+```
+flutter pub get
+flutter pub run flutter_launcher_icons:main
+```
+
+Check the images that got created in `android/app/src/main/res/*/*`.
+
+#### Create an upload keystore
+
+```
+keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+
+Create a file `key.properties` but don't check this file in (it's part of gitignore so this shouldn't happen)
+
+```
+storePassword=YOUR_PASSWORD
+keyPassword=YOUR_PASSWORD
+keyAlias=upload
+storeFile=/PATH/TO/upload-keystore.jks
+```
+
+Update `app/build.gradle` to use the key then run `flutter clean`.
+
+#### Create a build for your release
+
+Running flutter build defaults to a release build.
+
+```
+flutter build appbundle
+```
+
+The release bundle for your app is created at [project]/build/app/outputs/bundle/release/app.aab. Save it somewhere safe, a `flutter clean` will remove it.
+
+You can now create a new release in the play store and upload your `app.aab` file (this could take a few hours, but likely for new accounts can take 1-10 days as it's a manual process).
+#### Add Google's SHA-1 to Firebase
+
+In Google Play Store Console go to `App integrity > App Signing > App signing key certificate > SHA-1`.
+
+This is the public certificate for the app signing key that Google uses to sign each of your releases. Use it to register your key with API providers. The app signing key itself is not accessible, and is kept on a secure Google server.
+
+Add this to Firebase (google signin will always work locally, but won't work in production without adding google's SHA-1).
+
+#### Store listing
+
+You will need an image `icon-512x512.png` to add to your store listing. I also saved mine in `assets/` for easy access.
+
+You will also need screenshots from mobile (x2), 7" tablet, and 10" tablet.
