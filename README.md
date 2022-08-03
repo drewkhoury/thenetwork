@@ -9,6 +9,7 @@ Commits:
 - `67450d61858022e0bedf3307e08a3f5d75fe10ee` Part 1 changes - Simple app name changes, app almost identical
 - `27c4d14574a7e1693b1a38178c0bbd4c1819504d` Part 2 changes - Removing and changing the more complex parts of the app so it's just basic text screens and auth
 - `3056f2df73b0e99f841b3ab457478516c54fc7eb` Part 3 changes - Tidy up and Release notes
+- `c77aaca4e55d2dd9669d75fe70f058f1fbb4aeb8` Part 4 changes - Communicating with Firestore
 
 **Flutter Firebase - The Full Course 3.0**
 
@@ -91,11 +92,7 @@ Things to try:
 - You can also `wipe data` on emulators
 - `flutter clean` and restart emulators/android studio
 
-# Next steps
-
-You're now ready for Flutter app development!
-
-## Making the app your own - Part 1
+# PART 1 - Making the app your own
 
 We have 2 values to create for our new project.
 - YOUR_APP_NAME, eg `thenetworkapp`
@@ -142,7 +139,7 @@ Follow a guide like this: [How to Publish an Android App on Google Play Store: A
 
 - You can start creating your store listing, but you will need photos of your app and other things, you can come back to the details later
 
-## Making the app your own - Part 2
+# PART 2 - Making the app your own
 
 We're going to simplify the application by removing some of the quiz specific parts. This will make it easier to deploy a real app, while still keeping the core parts of login and auth. It will also give us a chance to become familar with a real app structure when it come to building something more complicated in the future.
 
@@ -163,7 +160,7 @@ We're going to simplify the application by removing some of the quiz specific pa
 
 ![](docs/run-p2.gif)
 
-## Release process and tidy up - Part 3
+# PART 3 - Release process and tidy up
 
 First let's take care of a bit of tidy up activities to get our project in a healthly state.
 
@@ -297,7 +294,7 @@ You will need an image `icon-512x512.png` to add to your store listing. I also s
 
 You will also need screenshots from mobile (x2), 7" tablet, and 10" tablet.
 
-### Part 4 - Communicating with Firestore
+# PART 4 - Communicating with Firestore
 
 Update `firestore.dart`, `models.dart` and `models.g.dart` with a new data model, a basic table with a userid and a field like `coffee_preference`.
 
