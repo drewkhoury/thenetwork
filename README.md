@@ -295,3 +295,50 @@ Add this to Firebase (google signin will always work locally, but won't work in 
 You will need an image `icon-512x512.png` to add to your store listing. I also saved mine in `assets/` for easy access.
 
 You will also need screenshots from mobile (x2), 7" tablet, and 10" tablet.
+
+
+### Part 4 - Communicating with Firestore
+
+Update `firestore.dart`, `models.dart` and `models.g.dart` with a new data model, a basic table with a userid and a field like `coffee_preference`.
+
+Update profile to show the data, and about to input the data.
+
+When you run your app after making the changes to read/write to a DB, you should get 2 prompts in the console:
+
+First:
+
+```
+W/Firestore(11704): (24.1.2) [WatchStream]: (ca3488) Stream closed with status: Status{code=PERMISSION_DENIED, description=Cloud Firestore API has not been used in project XXX before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=XXX then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry., cause=null}.
+```
+
+Second:
+
+```
+W/Firestore(11704): (24.1.2) [WatchStream]: (ca3488) Stream closed with status: Status{code=NOT_FOUND, description=The database (default) does not exist for project XXX Please visit https://console.cloud.google.com/datastore/setup?project=(default) to add a Cloud Datastore or Cloud Firestore database. , cause=null}.
+```
+
+Follow the URLS to enable the API, then choose Firestore Native mode and create your database.
+
+You'll want to update the rules for your database in the Firebase GUI to (change from false to true):
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+```
+
+Note: You'll need to consider more appropriate rules for production data.
+
+Data input:
+![](docs/p4-data-input.png)
+
+Showing data from the datasore:
+![](docs/p4-data-show.png)
+
+Firebase datasore:
+![](docs/p4-database.png)

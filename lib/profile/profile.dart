@@ -13,6 +13,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    var report = Provider.of<Report>(context);
     var user = AuthService().user;
 
     if (user != null) {
@@ -41,8 +42,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Text(user.email ?? '',
                   style: Theme.of(context).textTheme.headline6),
               const Spacer(),
-              Text('Profile', style: Theme.of(context).textTheme.headline2),
-              Text('More to come',
+              Text(report.coffeePreference,
+                  style: Theme.of(context).textTheme.headline2),
+              Text('your coffee preference',
                   style: Theme.of(context).textTheme.subtitle2),
               const Spacer(),
               ElevatedButton(
