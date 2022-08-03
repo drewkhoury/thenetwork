@@ -335,10 +335,13 @@ service cloud.firestore {
 Note: You'll need to consider more appropriate rules for production data.
 
 Data input:
+
 ![](docs/p4-data-input.png)
 
 Showing data from the datasore:
+
 ![](docs/p4-data-show.png)
 
 Firebase datasore:
+
 ![](docs/p4-database.png)
