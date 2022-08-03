@@ -8,6 +8,7 @@ Commits:
 - `73e8e3cfdbfa3fac979ff151ee8304c455714cce` Initial App
 - `67450d61858022e0bedf3307e08a3f5d75fe10ee` Part 1 changes - Simple app name changes, app almost identical
 - `27c4d14574a7e1693b1a38178c0bbd4c1819504d` Part 2 changes - Removing and changing the more complex parts of the app so it's just basic text screens and auth
+- `3056f2df73b0e99f841b3ab457478516c54fc7eb` Part 3 changes - Tidy up and Release notes
 
 **Flutter Firebase - The Full Course 3.0**
 
@@ -295,7 +296,6 @@ Add this to Firebase (google signin will always work locally, but won't work in 
 You will need an image `icon-512x512.png` to add to your store listing. I also saved mine in `assets/` for easy access.
 
 You will also need screenshots from mobile (x2), 7" tablet, and 10" tablet.
-
 
 ### Part 4 - Communicating with Firestore
 
